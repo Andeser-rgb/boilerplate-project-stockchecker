@@ -1,5 +1,7 @@
 'use strict';
 
+const fetch = require('node-fetch');
+
 module.exports = function (app) {
 
   app.route('/api/stock-prices')
