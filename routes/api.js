@@ -15,7 +15,7 @@ module.exports = function (app) {
         })
 
         response.on('end', () => {
-          data = JSON.parse(todo);
+          let data = JSON.parse(todo);
           res.send({
             stockData: {
               stock: stock,
