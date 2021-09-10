@@ -13,8 +13,11 @@ const app = express();
 
 app.use(helmet({
   contentSecurityPolicy: {
-    default-src: ['self'],
-    script-src: ['self']
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'"]
+    }
   }
 }));
 
