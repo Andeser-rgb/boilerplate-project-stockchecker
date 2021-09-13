@@ -43,9 +43,14 @@ module.exports = function(app) {
                                 addStock(StockLikes, stock, like, ip);
                                 if (like) likes = 1;
                             } else {
-                                if (like && !dbLikes.ips.includes(ip))
+                                let included = dbLikes.ips.includes(ip);
+                                if (like && !included){
                                     updateStockLikes(StockLikes, dbLikes, stock, ip);
-                                likes = dbLikes.likes + (like ? 1 : 0);
+                                    likes = dbLikes.likes + 1;
+                                }
+                                else{
+                                    likes = dbLikes.likes;
+                                }
                             }
                             res.send({
                                 stockData: {
@@ -129,7 +134,7 @@ function updateStockLikes(model, object, name, ip) {
         name: name
     }, {
         likes: object.likes + 1,
-        ips: object.ips.push(ip)
+        ips: [...object.ips, ip]
     }, (err, docs) => {
         if (err) throw err;
         console.log('Original doc: ' + docs);
