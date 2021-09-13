@@ -90,9 +90,12 @@ module.exports = function(app) {
                                         addStock(StockLikes, stock[0], like, ip);
                                         if (like) likes1 = 1;
                                     } else {
-                                        if (like && !dbLikes.ips.includes(ip))
+                                        if (like && !dbLikes.ips.includes(ip)){
                                             updateStockLikes(StockLikes, dbLikes, stock[0], ip);
-                                        likes1 = dbLikes.likes + (like ? 1 : 0);
+                                            likes1 = dbLikes.likes + 1;
+                                        }
+                                        else
+                                            likes1 = dbLikes.likes;
                                     }
                                     StockLikes.findOne({
                                         name: stock[1]
@@ -102,9 +105,12 @@ module.exports = function(app) {
                                             addStock(StockLikes, stock[1], like, ip);
                                             if (like) likes2 = 1;
                                         } else {
-                                            if (like && !dbLikes.ips.includes(ip))
+                                            if (like && !dbLikes.ips.includes(ip)){
                                                 updateStockLikes(StockLikes, dbLikes, stock[1], ip);
-                                            likes2 = dbLikes.likes + (like ? 1 : 0);
+                                                likes2 = dbLikes.likes + 1;
+                                            }
+                                            else
+                                                likes2 = dbLikes.likes;
                                         }
                                         res.send({
                                             stockData: [{
